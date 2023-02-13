@@ -1,5 +1,6 @@
 package com.microservicesfullstack.commons.alumnos.microserviciocommonsalumnos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,10 +34,18 @@ public class Alumno {
 	@Column(name = "create_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createAt;
+
+	@Lob
+	@JsonIgnore
+	private byte[] foto;
 	
 	@PrePersist
 	public void prePersist() {
 		this.createAt = new Date();
+	}
+
+	public Integer getFotoHashCode(){
+		return (this.foto != null) ? this.foto.hashCode():null;
 	}
 
 	@Override

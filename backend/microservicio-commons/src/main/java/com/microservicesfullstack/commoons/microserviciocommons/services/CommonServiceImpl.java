@@ -1,22 +1,28 @@
 package com.microservicesfullstack.commoons.microserviciocommons.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-@Service
-public class AlumnoServiceImpl<E, R extends JpaRepository<E, Integer>> implements AlumnoService<E>{
+public class CommonServiceImpl<E, R extends JpaRepository<E, Integer>> implements CommonService<E> {
 	
 	@Autowired
-	private R repository;
+	protected R repository;
 
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<E> findAll() {
 		return repository.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<E> findAll(Pageable pagable){
+		return repository.findAll(pagable);
 	}
 
 	@Override

@@ -39,6 +39,9 @@ public class Examen {
     @NotNull
     private Asignatura asignatura;
 
+    @Transient
+    private Boolean respondido;
+
     public Examen() {
         this.preguntas = new ArrayList<>();
     }
