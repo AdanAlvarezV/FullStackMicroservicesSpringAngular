@@ -65,7 +65,6 @@ public class CursoController extends CommonController<Curso, CursoService> {
         Curso curso = service.findCursoByAlumnoId(id);
 
         if (curso != null){
-            System.out.println("ARRAY => " + service.obtenerExamenesIdsConRespuestasAlumno(id));
             List<Integer> examenesIds = service.obtenerExamenesIdsConRespuestasAlumno(id).getBody();
             List<Examen> examenes = curso.getExamenes().stream()
                     .map(examen -> {
