@@ -9,4 +9,5 @@ import java.util.List;
 public interface ExamenService extends CommonService<Examen> {
     public List<Examen> findByNombre(String term);
     public Iterable<Asignatura> findAllAsignaturas();
+    public List<Integer> findExamenesIdsConRespuestasByPreguntaIds(List<Integer> preguntaIds);
 }

@@ -1,15 +1,16 @@
 package com.microservicesfullstack.respuestas.microserviciorespuestas;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+@EnableFeignClients
 @EnableEurekaClient
 @SpringBootApplication
-@EntityScan({"com.microservicesfullstack.respuestas.microserviciorespuestas.models.entity",
-		"com.microservicesfullstack.commons.alumnos.microserviciocommonsalumnos.entity",
-		"com.microservicesfullstack.commons.examenes.microserviciocommonsexamenes.models.entity"})
 public class MicroservicioRespuestasApplication {
 
 	public static void main(String[] args) {

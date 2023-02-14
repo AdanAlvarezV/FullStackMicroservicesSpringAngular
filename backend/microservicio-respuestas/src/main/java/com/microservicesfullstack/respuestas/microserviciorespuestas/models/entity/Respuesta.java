@@ -1,26 +1,32 @@
 package com.microservicesfullstack.respuestas.microserviciorespuestas.models.entity;
 
+import com.microservicesfullstack.respuestas.microserviciorespuestas.models.pojo.Alumno;
+import com.microservicesfullstack.respuestas.microserviciorespuestas.models.pojo.Pregunta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.microservicesfullstack.commons.alumnos.microserviciocommonsalumnos.entity.Alumno;
-import com.microservicesfullstack.commons.examenes.microserviciocommonsexamenes.models.entity.Pregunta;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "respuesta")
+@Document(collection = "respuestas")
 public class Respuesta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
     private String texto;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @Transient
     private Alumno alumno;
-    @OneToOne(fetch = FetchType.LAZY)
+
+    private Integer alumnoId;
+
+    @Transient
     private Pregunta pregunta;
+
+    private Integer preguntaId;
 }

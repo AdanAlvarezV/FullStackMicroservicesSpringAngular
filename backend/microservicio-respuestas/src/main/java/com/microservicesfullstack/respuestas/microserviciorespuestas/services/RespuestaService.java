@@ -12,4 +12,6 @@ public interface RespuestaService {
 
     public List<Integer> findExamenesIdsConRespuestasByAlumno(Integer alumnoId);
 
+    public List<Respuesta> findByAlumnoId(Integer alumnoId);
+
 }

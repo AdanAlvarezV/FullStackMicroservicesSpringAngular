@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-@Data
+//@Data
 @AllArgsConstructor
 @Entity
 @Table(name = "examen")
@@ -61,9 +61,53 @@ public class Examen {
         pregunta.setExamen(null);
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public List<Pregunta> getPreguntas() {
+        return preguntas;
+    }
+
     public void setPreguntas(List<Pregunta> preguntas){
         this.preguntas.clear();
         preguntas.forEach(this::addPregunta);
+    }
+
+    public Asignatura getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
+    }
+
+    public Boolean getRespondido() {
+        return respondido;
+    }
+
+    public void setRespondido(Boolean respondido) {
+        this.respondido = respondido;
     }
 
     @Override

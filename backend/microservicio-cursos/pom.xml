@@ -46,14 +46,6 @@
         </dependency>
         C:\projects\udemy\MicroservicesSpringAngular\backend\microservicio-commons\target\microservicio-commons-0.0.1-SNAPSHOT.jar
         -->
-		<!--AGREGAR PROYECTO DE ALUMNO
-        <dependency>
-            <groupId>com.microservicesfullstack.commons.alumnos</groupId>
-            <artifactId>microservicio-commons-alumnos</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        C:\projects\udemy\MicroservicesSpringAngular\backend\microservicio-commons-alumnos\target\microservicio-commons-alumnos-0.0.1-SNAPSHOT.jar
-            -->
 		<!--AGREGAR PROYECTO DE EXAMEN
 		<dependency>
 			<groupId>com.microservicesfullstack.commons.examenes</groupId>
