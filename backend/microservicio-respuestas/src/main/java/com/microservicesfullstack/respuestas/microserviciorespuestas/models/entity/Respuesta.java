@@ -20,12 +20,12 @@ public class Respuesta {
     private String id;
     private String texto;
 
-    @Transient
+    //@Transient
     private Alumno alumno;
 
     private Integer alumnoId;
 
-    @Transient
+    //@Transient
     private Pregunta pregunta;
 
     private Integer preguntaId;

@@ -22,4 +22,10 @@ public interface RespuestaRepository extends MongoRepository<Respuesta, Integer>
     @Query("{'alumnoId':?0}")
     public List<Respuesta> findByAlumnoId(Integer alumnoId);
 
+    @Query("{'alumnoId':?0, 'pregunta.examen.id':?1}")
+    public List<Respuesta> findRespuestaByAlumnoByExamen(Integer alumnoId, Integer examenId);
+
+    @Query(value = "{'alumnoId':?0}", fields = "{'pregunta.examen.id':1}")
+    public List<Respuesta> findExamenesIdsConRespuestasByAlumno(Integer alumnoId);
+
 }

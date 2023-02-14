@@ -18,8 +18,8 @@ public class RespuestaServiceImpl implements RespuestaService{
     @Autowired
     private RespuestaRepository repository;
 
-    @Autowired
-    private ExamenFeignClient examenClient;
+    //@Autowired
+    //private ExamenFeignClient examenClient;
 
     @Override
     public Iterable<Respuesta> saveAll(Iterable<Respuesta> respuestas){
@@ -28,6 +28,7 @@ public class RespuestaServiceImpl implements RespuestaService{
 
     @Override
     public Iterable<Respuesta> findRespuestaByAlumnoByExamen(Integer alumnoId, Integer examenId){
+        /*
         Examen examen = examenClient.obtenerExamenPorId(examenId);
         List<Pregunta> preguntas = examen.getPreguntas();
         List<Integer> preguntaIds = preguntas.stream()
@@ -42,11 +43,14 @@ public class RespuestaServiceImpl implements RespuestaService{
                     });
                     return r;
                 }).collect(Collectors.toList());
+         */
+        List<Respuesta> respuestas = repository.findRespuestaByAlumnoByExamen(alumnoId, examenId);
         return respuestas;
     }
 
     @Override
     public List<Integer> findExamenesIdsConRespuestasByAlumno(Integer alumnoId){
+        /*
         List<Respuesta> respuestasAlumno = repository.findByAlumnoId(alumnoId);
         List<Integer> examenIds = Collections.emptyList();
         if (respuestasAlumno.size() > 0){
@@ -55,6 +59,13 @@ public class RespuestaServiceImpl implements RespuestaService{
                     .collect(Collectors.toList());
             examenIds = examenClient.obtenerExamenesIdsPorPreguntasIdRespondidas(preguntasIds);
         }
+         */
+
+        List<Respuesta> respuestasAlumno = repository.findExamenesIdsConRespuestasByAlumno(alumnoId);
+        List<Integer> examenIds = respuestasAlumno.stream()
+                .map(r -> r.getPregunta().getExamen().getId())
+                .distinct()
+                .collect(Collectors.toList());
         return examenIds;
     }
 
