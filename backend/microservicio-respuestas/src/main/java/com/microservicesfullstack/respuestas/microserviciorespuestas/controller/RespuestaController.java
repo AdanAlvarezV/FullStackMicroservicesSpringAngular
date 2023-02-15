@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+//@CrossOrigin({"http://localhost:4200"})
 public class RespuestaController {
 
     @Autowired

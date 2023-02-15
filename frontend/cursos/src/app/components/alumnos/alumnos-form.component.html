@@ -1,0 +1,39 @@
+<div class="card text-bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <button class="btn btn-secondary my-2" routerLink="/alumnos">Volver</button>
+        
+        <form>
+            <div class="form-goup">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" class="form-control my-1" id="nombre"
+                [(ngModel)]="alumno.nombre">
+                <div class="alert alert-danger" *ngIf="error?.nombre">
+                    {{error.nombre}}
+                </div>
+            </div>
+            <div class="form-goup">
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" class="form-control my-1" id="apellido"
+                [(ngModel)]="alumno.apellido">
+                <div class="alert alert-danger" *ngIf="error?.apellido">
+                    {{error.apellido}}
+                </div>
+            </div>
+            <div class="form-goup">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control my-1" id="email"
+                [(ngModel)]="alumno.email">
+                <div class="alert alert-danger" *ngIf="error?.email">
+                    {{error.email}}
+                </div>
+            </div>
+            <div class="form-goup">
+                <button type="button" class="btn btn-primary my-3"
+                        (click)="alumno.id? editar():crear()">
+                    {{alumno.id ? 'Editar':'Crear'}}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
