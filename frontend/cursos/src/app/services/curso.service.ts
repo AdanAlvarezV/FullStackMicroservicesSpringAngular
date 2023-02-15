@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Curso } from '../models/curso';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CursoService {
+export class CursoService extends CommonService<Curso>{
 
-  constructor() { }
+  protected baseEndpoint: string = 'http://localhost:8090/api/cursos';
 }

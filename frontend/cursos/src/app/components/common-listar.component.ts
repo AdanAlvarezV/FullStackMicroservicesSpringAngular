@@ -4,12 +4,7 @@ import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
-@Component({
-  selector: 'app-alumnos',
-  templateUrl: './alumnos.component.html',
-  styleUrls: ['./alumnos.component.css']
-})
-export class AlumnosComponent implements OnInit {
+export abstract class CommonListarComponent<E, S> implements OnInit {
 
   titulo:string = 'Listado de alumnos';
   alumnos: Alumno[] = [];

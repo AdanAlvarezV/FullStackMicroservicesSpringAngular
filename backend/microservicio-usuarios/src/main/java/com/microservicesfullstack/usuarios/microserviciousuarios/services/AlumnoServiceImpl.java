@@ -53,6 +53,8 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
     @Override
     @Transactional(readOnly = true)
     public Page<Alumno> findAll(Pageable pagable) {
+        System.out.println("PEGABLE => " + pagable);
+        System.out.println("PAGE ALUMNOS => " + repository.findAllByOrderByIdAsc(pagable));
         return repository.findAllByOrderByIdAsc(pagable);
     }
 }
