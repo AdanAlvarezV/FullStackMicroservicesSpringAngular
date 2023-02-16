@@ -10,6 +10,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Alumnos</th>
                     <th>Creado en</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -19,6 +20,12 @@
                 <tr *ngFor="let curso of lista">
                     <td>{{curso.id}}</td>
                     <td>{{curso.nombre | titlecase}}</td>
+                    <th>
+                        <button class="btn btn-secondary btn-sm"
+                                [routerLink]="['/cursos/asignar-alumnos', curso.id]">
+                                Añadir ({{curso.alumnos.length}})
+                        </button>
+                    </th>
                     <td>{{curso.createAt | date:'yyyy/MMMM/dd EEEE h:mm:ss'}}</td>
                     <td>
                         <button class="btn btn-secondary btn-sm"
