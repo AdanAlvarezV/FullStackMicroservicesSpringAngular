@@ -2,13 +2,14 @@
     <div class="card-header">{{titulo}}</div>
     <div class="card-body">
         <button class="btn btn-primary my-2" routerLink="/alumnos/form">Crear</button>
-        <div class="alert alert-info" *ngIf="alumnos?.length == 0">
+        <div class="alert alert-info" *ngIf="lista?.length == 0">
             No hay alumnos en el sistema.
         </div>
-        <table class="table table-hover table-striped" *ngIf="alumnos?.length > 0">
+        <table class="table table-hover table-striped" *ngIf="lista?.length > 0">
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Foto</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Email</th>
@@ -18,8 +19,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let alumno of alumnos">
+                <tr *ngFor="let alumno of lista">
                     <td>{{alumno.id}}</td>
+                    <td>
+                        <img *ngIf="alumno.fotoHashCode"
+                        [src]="baseEndpoint + '/uploads/img/' + alumno.id + '?fotoHashCode=' + alumno.fotoHashCode"
+                        class="img-thumbnail rounded"
+                        style="width: 64px; cursor:pointer;">
+
+                        <img *ngIf="!alumno.fotoHashCode"
+                        [src]="'/assets/images/663098.jpg'"
+                        class="img-thumbnail rounded"
+                        style="width: 64px; cursor:pointer;">
+                    </td>
                     <td>{{alumno.nombre | titlecase}}</td>
                     <td>{{alumno.apellido | titlecase}}</td>
                     <td>{{alumno.email}}</td>
@@ -46,6 +58,6 @@
               (page)="paginar($event)"
               showFirstLastButtons
               class="float-left mx-2">
-        </mat-paginator>
+            </mat-paginator>
     </div>
   </div>

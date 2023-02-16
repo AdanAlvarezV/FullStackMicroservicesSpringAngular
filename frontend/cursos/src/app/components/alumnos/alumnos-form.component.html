@@ -7,7 +7,7 @@
             <div class="form-goup">
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" class="form-control my-1" id="nombre"
-                [(ngModel)]="alumno.nombre">
+                [(ngModel)]="model.nombre">
                 <div class="alert alert-danger" *ngIf="error?.nombre">
                     {{error.nombre}}
                 </div>
@@ -15,7 +15,7 @@
             <div class="form-goup">
                 <label for="apellido">Apellido</label>
                 <input type="text" name="apellido" class="form-control my-1" id="apellido"
-                [(ngModel)]="alumno.apellido">
+                [(ngModel)]="model.apellido">
                 <div class="alert alert-danger" *ngIf="error?.apellido">
                     {{error.apellido}}
                 </div>
@@ -23,15 +23,23 @@
             <div class="form-goup">
                 <label for="email">Email</label>
                 <input type="text" name="email" class="form-control my-1" id="email"
-                [(ngModel)]="alumno.email">
+                [(ngModel)]="model.email">
                 <div class="alert alert-danger" *ngIf="error?.email">
                     {{error.email}}
                 </div>
             </div>
+
+            <div class="form-goup">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Seleccionar Foto</label>
+                    <input (change)="seleccionarFoto($event)" class="form-control" type="file" id="formFile">
+                </div>
+            </div>
+
             <div class="form-goup">
                 <button type="button" class="btn btn-primary my-3"
-                        (click)="alumno.id? editar():crear()">
-                    {{alumno.id ? 'Editar':'Crear'}}
+                        (click)="model.id? editar():crear()">
+                    {{model.id ? 'Editar':'Crear'}}
                 </button>
             </div>
         </form>

@@ -1,22 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
-import { Alumno } from 'src/app/models/alumno';
-import { AlumnoService } from 'src/app/services/alumno.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Generic } from '../models/generic';
+import { CommonService } from '../services/common.service';
 
-export abstract class CommonListarComponent<E, S> implements OnInit {
+export abstract class CommonListarComponent<E extends Generic, S extends CommonService<E>> implements OnInit {
 
-  titulo:string = 'Listado de alumnos';
-  alumnos: Alumno[] = [];
+  titulo:string;
+  lista: E[] = [];
+  protected nombreModel: string;
 
-  totalRegistros: number = 0;
-  paginaActual: number = 0;
-  totalPorPagina: number = 4;
+  totalRegistros = 0;
+  paginaActual = 0;
+  totalPorPagina = 4;
   pageSizeOptions: number[] = [3, 5, 10, 25, 100];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private service: AlumnoService) { }
+  constructor(protected service: S) { }
 
   ngOnInit(): void {
     this.calcularRangos();
@@ -31,16 +32,16 @@ export abstract class CommonListarComponent<E, S> implements OnInit {
   private calcularRangos(){    
     this.service.listarPaginas(this.paginaActual.toString(), this.totalPorPagina.toString())
       .subscribe(p => {
-        this.alumnos = p.content as Alumno[];
-        this.totalRegistros = p.totlaElements as number;
-        this.paginator._intl.itemsPerPageLabel = "Regitros porpágina:";
+        this.lista = p.content as E[];
+        this.totalRegistros = p.totalElements as number;
+        this.paginator._intl.itemsPerPageLabel = 'Registros por página:';
       });
   }
 
-  public eliminar(alumno: Alumno): void{
+  public eliminar(e: E): void{
     Swal.fire({
       title: 'Cuidado:',
-      text: `¿Seguro que desea eliminar a ${alumno.nombre} ?`,
+      text: `¿Seguro que desea eliminar a ${e.nombre} ?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -48,10 +49,9 @@ export abstract class CommonListarComponent<E, S> implements OnInit {
       confirmButtonText: 'Si, eliminar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.eliminar(alumno.id).subscribe(() => {
-          //this.alumnos = this.alumnos.filter(a => a !== alumno);
+        this.service.eliminar(e.id).subscribe(() => {
           this.calcularRangos();
-          Swal.fire('Eliminado:', `Alumno ${alumno.nombre} eliminado con éxito`, 'success');
+          Swal.fire('Eliminado:', `${this.nombreModel} ${e.nombre} eliminado con éxito`, 'success');
         });
       }
     });
